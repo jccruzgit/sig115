@@ -1,0 +1,98 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %}Precios{% endblock %}
+{% block body %}
+<header style="background: grey"><a class="create-book waves-effect green btn text-white"><i class="material-icons left">add</i>Agregar</a></a>
+</header>
+<div class="container">
+<h2>Lista de Precios</h2>
+</div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Prueba</th>
+                    <th>Precios</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+        <tbody>
+
+            {% if precio_list  %}
+                {% for precio in precio_list %}
+                <tr>
+                    <td>{{ precio.idEmpresa }}</td>
+                    <td>{{ precio.idTipoPrueba}} </td>
+                    <td>{{ precio.precio}}</td>
+                    <td>
+                         <button type="button" class="update-book btn btn-sm btn-primary" data-id="{% url 'facturacion:preciosupdate' precio.pk%}">
+                            <i class="material-icons">update</i>
+                         </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <h1>No Existen Precios registrados</h1>
+            {% endif %}
+
+          </tbody>
+
+            <tfoot>
+
+            <ul class="pagination">
+    <li class="waves-effect">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a>
+        {% endif %}
+    </li>
+    <li class="waves-effect">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" ><i class="material-icons">chevron_right</i></a>
+        {% endif %}
+    </li>
+  </ul>
+            </tfoot>
+    </table>
+    </div>
+<!-- Create book button -->
+<div class="modalB" tabindex="-1" role="dialog" id="modal2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+{% block script %}
+
+    <script type="text/javascript">
+$(document).ready(function() {
+
+    $(".create-book").modalForm({
+        modalID: "#modal2",
+        formURL: "{% url 'facturacion:preciosadd' %}",
+
+    });
+
+});
+</script>
+
+
+<script type="text/javascript">
+  $(function () {
+    // Create book button
+
+    $(".update-book").each(function () {
+
+      $(this).modalForm({
+          modalID: "#modal2",
+          formURL: $(this).data('id')});
+    });
+
+  });
+</script>
+{% endblock %}

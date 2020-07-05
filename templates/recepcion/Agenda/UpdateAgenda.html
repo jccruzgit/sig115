@@ -1,0 +1,44 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block body %}
+    <div class="class_container_crud">
+    <h4 class="center-align">Evaluado </h4>
+            <form method="post" action="">
+            {% csrf_token %}
+
+                <div id="datos">
+                </div>
+                {{ form.as_p }}
+                <div class="center-align">
+                    <input class="btn green" type="submit" value="Guardar">
+                    <a class="waves-effect red btn" href="{% url 'recepcion:agendados' %}">Cancelar</a>
+                </div>
+
+            </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<!--
+<script>
+    $('#id_idEmpresa').on('change', inicio);
+    function inicio() {
+        var id = $(this).val();
+        $.ajax({
+            data: {'id':id},
+            url:'/recepcion/busqueda_ajax/',
+            type: 'get',
+            success:function (data) {
+                console.log(data)
+                var html = ""
+                for (var i = 0;i<data.length;i++){
+                    html +='<h6>'+data[i].fields.nombre+'</h6>'
+                }
+                $('#datos').html(html);
+            }
+        });
+    }
+    </script>
+-->
+{% endblock %}

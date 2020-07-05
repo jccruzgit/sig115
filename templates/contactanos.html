@@ -1,0 +1,154 @@
+{% extends 'default.html' %}
+{% load static %}
+
+{% block titulo %}Contactanos {% endblock %}
+
+{% block enlaces %}
+    <li><a href="{% url 'servicios' %}"><i class="material-icons left">work</i>Servicios</a></li>
+    <li><a href="{% url 'nosotros' %}"><i class="material-icons left">people</i>Nosotros</a></li>
+    <li><a href="{% url 'contactanos' %}"><i class="material-icons left">phone_in_talk</i>contactenos</a></li>
+    <li><a href="{% url 'recepcion:login' %}"><i class="material-icons left">account_circle</i>Login</a></li>
+
+{% endblock %}
+
+{% block body %}
+
+    <div style="margin-left: 3%;margin-right: 3%;">
+    <ul id="tabs-swipe-demo" class="tabs">
+    <li class="tab col s3"><a href="#swipe-1" class="black-text">Direccion </a></li>
+    <li class="tab col s3"><a href="#swipe-2" class>Correos </a></li>
+    <li class="tab col s3"><a href="#swipe-3" class="black-text">Horarios de atencion</a></li>
+  </ul>
+  <div id="swipe-1" class="col s12 white" style="height: 150px;">
+
+      <div class="row">
+    <div class="col s12">
+      <div class="card">
+          <div class="#cfd8dc blue-grey lighten-4" >
+        <span class="card-title">Encuentranos </span>
+          </div>
+              <div class="card-content">
+          <p>13 Calle Poniente No. 4344, San Salvador</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  <div id="swipe-2" class="col s12 white">
+
+      <div class="row">
+    <div class="col s12">
+      <div class="card">
+          <div class="#cfd8dc blue-grey lighten-4" >
+        <span class="card-title">Escribenos </span>
+          </div>
+              <div class="card-content">
+          <p>aservicios@arguetaservicios.com</p>
+                  <p>info@arguetaservicios.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div id="swipe-3" class="col s12 white">
+
+      <div class="row">
+    <div class="col s12">
+      <div class="card">
+          <div class="#cfd8dc blue-grey lighten-4" >
+        <span class="card-title">Nuestros Horarios de Atencion</span>
+          </div>
+              <div class="card-content">
+          <p>Lunes a Viernes : 8:00 AM - 5:00 PM</p>
+                  <P>Sabados : 8:00 AM - 12:00 PM</P>
+        </div>
+          <div class="card-footer">
+              <p>Brindamos Servicios de antencion especial, para mayor informacion escribenos...</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+</div>
+
+
+<div class="grid-container-map" id="direccion">
+</div>
+<div id="correo">
+      <div class="parallax">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6518.927770456424!2d-89.24042517209993!3d13.707688406485238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6330198d40fe73%3A0x108072a97eb3c378!2s13%20Calle%20Poniente%204344%2C%20San%20Salvador!5e0!3m2!1ses!2ssv!4v1592971519448!5m2!1ses!2ssv" width="100%" height="60" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
+</div>
+   <div class="center">
+       <h2 class="header"><i class="medium material-icons">mail</i>&nbsp;Contactanos</h2>
+        <p class="grey-text text-darken-3 lighten-3">¡Envianos tus comentarios o consultas, sera un gusto atenderte!</p>
+</div>
+
+
+          <div class="class_container_crud">
+              <form method="post" action="{% url 'send' %}">
+                    {% csrf_token %}
+                  <div class="input-field col s6">
+            <input id="input_text" type="email" name="correo" data-length="10">
+            <label for="input_text">Correo</label>
+          </div>
+
+
+                  <div class="input-field col s6">
+            <input id="asunto" name="asunto" type="text" data-length="10">
+            <label for="asunto">Asunto</label>
+          </div>
+
+
+                   <div class="input-field col s12">
+            <textarea id="textarea2" name="mensaje" class="materialize-textarea" data-length="120"></textarea>
+            <label for="textarea2">Mensaje</label>
+          </div>
+                  <div class="right-align">
+                      <button class="btn waves-effect blue right-aligned" onclick="M.toast({html: 'Mensaje enviado', classes:'rounded green'})" type="submit" name="action">Enviar
+    <i class="material-icons right">send</i>
+  </button>
+                  </div>
+              </form>
+            </div>
+
+    </div>
+
+    </div>
+<script>
+  M.toast({html: 'Mensaje enviado'})
+</script>
+{% endblock %}
+
+{% block footer%}
+        <footer class="page-footer black">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Buscanos en nuestras redes sociales</h5>
+                <a href="https://www.facebook.com/arguetaservicios/" class="fa fa-facebook" prefix="left"></a>
+                  <p>
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Farguetaservicios%2F&width=203&layout=button_count&action=like&size=large&show_faces=true&share=true&height=46&appId" width="203" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Mapa del Sitio</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#direccion">Direccion</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#correo">Comentario</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'home' %}">home</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'recepcion:login' %}">Login</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright Argueta Servicios S.A de C.V
+            </div>
+          </div>
+        </footer>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block body %}
+<header style="background: grey"><a class="waves-effect green btn" href="{% url 'recepcion:create' %}"><i class="material-icons left">add</i>Agregar</a></a>
+</header>
+<div class="container">
+<h2>Lista Usuarios</h2>
+</div>
+    <div class="container">
+        <table class="highlight centered responsive-table">
+            <thead>
+                <tr>
+
+                    <th>Username</th>
+                    <th>nombres</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+        <tbody>
+            {% if user_list  %}
+                {% for user in user_list %}
+                <tr>
+
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                   <a class="btn-floating btn-medium waves-effect waves-light blue" href="{% url 'recepcion:userUpdate' user.id%}"><i class="material-icons">update</i></a>
+                   <a class="btn-floating btn-medium waves-effect waves-light red" href="{% url 'recepcion:userDelete' user.id%}"><i class="material-icons">delete</i></a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <h1>No hay registros Usuarios</h1>
+            {% endif %}
+          </tbody>
+
+
+            <tfoot>
+
+            <ul class="pagination">
+    <li class="waves-effect">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a>
+        {% endif %}
+    </li>
+    <li class="waves-effect">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" ><i class="material-icons">chevron_right</i></a>
+        {% endif %}
+    </li>
+  </ul>
+            </tfoot>
+    </table>
+    </div>
+{% endblock %}

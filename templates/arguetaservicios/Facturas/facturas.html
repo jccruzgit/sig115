@@ -1,0 +1,49 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %}Facturar {% endblock %}
+{% block body %}
+ <div class="card text-center" style="margin-top: 5em;">
+  <div class="card-header">
+    Facturacion
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Seleccionar la Empresa y las fechas a facturar</h5>
+
+
+ <div class="row">
+    <form class="col s12" action="{% url 'facturacion:detalle' %}" method="POST">
+    {% csrf_token %}
+     <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Empresa</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect01" name="empresa">
+       <option value="" selected="selected">Empresa</option>
+          {% for empresa in empresas %}
+          <option value="{{ empresa.codEmpresa }}" name="empresa">{{ empresa.nombre }}</option>
+          {% endfor %}
+      </select>
+    </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">date_range</i>
+          <input id="icon_prefix" type="date" name="desde" class="validate">
+          <label for="icon_prefix">Desde</label>
+        </div>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">date_range</i>
+          <input id="icon_telephone" type="date" name="hasta" class="validate">
+          <label for="icon_telephone">Hasta</label>
+        </div>
+      </div>
+     <div class="card-footer text-muted">
+    <button name="action" type="submit" class="btn #2196f3 blue">Ver detalle</button>
+  </div>
+
+    </form>
+  </div>
+
+  </div>
+ </div>
+{% endblock %}

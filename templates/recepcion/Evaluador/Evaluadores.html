@@ -1,0 +1,53 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block titulo %}Evaluadores{% endblock %}
+{% block body %}
+<header style="background: white"><a class="waves-effect green btn" href="{% url 'recepcion:evaluadoradd' %}"><i class="material-icons left">add</i>Agregar</a></a>
+</header>
+<div class="container">
+	<h2>Lista de Evaluadores</h2>
+</div>
+    <div class="container">
+        <table class="highlight centered responsive-table">
+        	<thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Letra</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if evaluador_list  %}
+                {% for evaluador in evaluador_list %}
+                <tr>
+                    <td>{{ evaluador.nombre }}</td>
+                    <td>{{ evaluador.letra }}</td>
+                    <td>
+                        <a class="btn-floating btn-medium waves-effect waves-light blue" href="{% url 'recepcion:evaluadorupdate' evaluador.idEvaluador%}"><i class="material-icons">update</i></a>
+                   <a class="btn-floating btn-medium waves-effect waves-light red" href="{% url 'recepcion:evaluadordelete' evaluador.idEvaluador%}"><i class="material-icons">delete</i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <h1>No existe registros de Evaluadores</h1>
+            {% endif %}
+          </tbody>
+
+            <tfoot>
+
+            <ul class="pagination">
+    <li class="waves-effect">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a>
+        {% endif %}
+    </li>
+    <li class="waves-effect">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" ><i class="material-icons">chevron_right</i></a>
+        {% endif %}
+    </li>
+  </ul>
+            </tfoot>
+    </table>
+    </div>
+{% endblock %}

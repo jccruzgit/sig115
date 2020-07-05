@@ -1,0 +1,408 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %}Detalle{% endblock %}
+{% block body %}
+<div class="card text-center">
+  <div class="card-header">
+   {{ empresa }}
+
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Detalle de facutura</h5>
+    <!-- tabla -->
+  <table class="table center">
+  <thead class="blue white-text">
+    <tr>
+      <th scope="col">Fecha Evaluacion</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Resultado</th>
+      <th scope="col">Tipo de Prueba</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for ficha in fichas %}
+    <tr>
+      <td>{{ ficha.fechaFicha }}</td>
+      <td>{{ ficha.idProgramado.nombreEvaluado }}</td>
+      <td>{{ ficha.idResultado }}</td>
+      <td>{{ ficha.idProgramado.idTipoPrueba }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+      <!-- fin tabla -->
+  <div style="margin-top: 3em;">
+  <!-- factura con iva -->
+  <button type="button" class="btn btn-primary #0d47a1 blue darken-4" data-toggle="modal" data-target=".bd-example-modal-lg">Credito Fiscal</button>
+  <div class="modalB fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header white-text blue">
+            <h4 class="modal-title">Credito Fiscal </h4>
+        </div>
+        <div class="modal-body">
+
+  <table class="table table-sm" id="example3">
+
+  <thead>
+  <!--fondo empresa -->
+  <tr>
+      <img src="{% static "img/fondo.png"%}" width="50%">
+  </tr>
+   <tr>
+       <div class="row">
+           <div class="col-sm-6 left-align">
+               <p>Cliente: {{ empresa }}</p>
+               <p>Direccion: {{ empresa.direccion }}</p>
+               <p>Venta a cuenta de: </p>
+           </div>
+           <div class="col-sm-6 left-align">
+                <p>Fecha: {% now "d/m/y" %} </p>
+               <p>NIT: {{ empresa.nit }}</p>
+           </div>
+       </div>
+   </tr>
+  <!-- datos numericos de la factura -->
+    <tr>
+      <th scope="col">Cant.</th>
+        <th>Descriptcion</th>
+        <th>Precio Unitario</th>
+        <th>VTA N/SUJ</th>
+        <th>VTA EXEN.</th>
+        <th> VENTAS GRABADAS</th>
+    </tr>
+  </thead>
+  <tbody>
+  <!-- valores de facuta -->
+    <tr>
+      <th scope="row">{{ fichas.count }}</th>
+      <td>Pruebas psicologicas</td>
+        <td>{{ monto }}</td>
+        <td></td>
+        <td></td>
+        <td>{{ iva | floatformat:2}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>SUMAS $</td>
+        <td>{{ iva |floatformat:2 }}</td>
+    </tr>
+  <tr>
+      <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>(-) IVA RETENIDO $</td>
+        <td></td>
+    </tr>
+  <tr>
+      <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>SUB-TOTAL $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>VENTAS NO SUJETAS $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>VENTAS EXENTAS $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>TOTAL $</td>
+        <td>{{ iva|floatformat:2}}</td>
+    </tr>
+  </tbody>
+</table>
+
+            <!--PDF -->
+       <div class="col-lg-1">
+       <form action="{% url 'facturacion:reporte_personas_pdf' %}" method="get">
+           {% csrf_token %}
+
+           <input class="hide" value="{{ emo }}" name="emo" >
+           <input class="hide" value="{{ desde }}" name="desde">
+           <input class="hide" value="{{ hasta }}" name="hasta">
+            <input class="hide" value="cf", name="tipo">
+
+          <button class="btn waves-effect red" type="submit" name="action">Generar Factura
+            <i class="material-icons right">file</i>
+          </button>
+       </form>
+       </div>
+
+        </div>
+    </div>
+  </div>
+  </div>
+     <!-- fin factura con iva -->
+   <!-- Factura consumidor final -->
+      <button type="button" class="btn btn-primary #0d47a1 blue darken-4" data-toggle="modal" data-target=".bd-example-modal-lg2">Consumidor Final</button>
+  <div class="modalB fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header white-text blue">
+            <h4 class="modal-title">Consumidor Final</h4>
+        </div>
+        <div class="modal-body">
+
+  <table class="table table-sm" >
+
+  <thead>
+  <!--fondo empresa -->
+  <tr>
+      <img src="{% static "img/fondo.png"%}" width="50%">
+  </tr>
+   <tr>
+       <div class="row">
+           <div class="col-sm-6 left-align">
+               <p>Cliente: {{ empresa }}</p>
+               <p>Direccion: {{ empresa.direccion }}</p>
+               <p>Venta a cuenta de: </p>
+           </div>
+           <div class="col-sm-6 left-align">
+                <p>Fecha: {% now "d/m/y" %} </p>
+               <p>NIT: {{ empresa.nit }}</p>
+           </div>
+       </div>
+   </tr>
+  <!-- datos numericos de la factura -->
+    <tr>
+      <th scope="col">Cant.</th>
+        <th>Descriptcion</th>
+        <th>Precio Unitario</th>
+        <th>VTA N/SUJ</th>
+        <th>VTA EXEN.</th>
+        <th> VENTAS GRABADAS</th>
+    </tr>
+  </thead>
+  <tbody>
+  <!-- valores de facuta -->
+    <tr>
+      <th scope="row">{{ fichas.count }}</th>
+      <td>Pruebas psicometricas</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ iva | floatformat:2}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>SUMAS $</td>
+        <td>{{ iva |floatformat:2 }}</td>
+    </tr>
+  <tr>
+      <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>(-) IVA RETENIDO $</td>
+        <td></td>
+    </tr>
+  <tr>
+      <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>SUB-TOTAL $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>VENTAS NO SUJETAS $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>VENTAS EXENTAS $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>TOTAL $</td>
+        <td>{{ iva|floatformat:2}}</td>
+    </tr>
+  </tbody>
+</table>
+                        <!--PDF -->
+       <div class="col-lg-1">
+       <form action="{% url 'ArguetaServicios:reporte_personas_pdf' %}" method="get">
+           {% csrf_token %}
+
+           <input class="hide" value="{{ emo }}" name="emo" >
+           <input class="hide" value="{{ desde }}" name="desde">
+           <input class="hide" value="{{ hasta }}" name="hasta">
+           <input class="hide" value="cc", name="tipo">
+
+          <button class="btn waves-effect red" type="submit" name="action">Generar Factura
+            <i class="material-icons right">file</i>
+          </button>
+       </form>
+       </div>
+
+        </div>
+    </div>
+  </div>
+  </div>
+      <!-- Fin factura consumidor final -->
+
+      <!-- Factura Manufacturera -->
+      <button type="button" class="btn btn-primary #0d47a1 blue darken-4" data-toggle="modal" data-target=".bd-example-modal-lg3">Manufactura</button>
+  <div class="modalB fade bd-example-modal-lg3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header white-text blue">
+            <h4 class="modal-title">Manufactura</h4>
+        </div>
+        <div class="modal-body">
+
+  <table id="myTable" class="table table-sm" >
+
+  <thead>
+  <!--fondo empresa -->
+  <tr>
+      <img src="{% static "img/fondo.png"%}" width="50%">
+  </tr>
+   <tr>
+       <div class="row">
+           <div class="col-sm-6 left-align">
+               <p>Cliente: {{ empresa }}</p>
+               <p>Direccion: {{ empresa.direccion }}</p>
+               <p>Venta a cuenta de: </p>
+           </div>
+           <div class="col-sm-6 left-align">
+                <p>Fecha: {% now "d/m/y" %} </p>
+               <p>NIT: {{ empresa.nit }}</p>
+           </div>
+       </div>
+   </tr>
+  <!-- datos numericos de la factura -->
+    <tr>
+      <th scope="col">Cant.</th>
+        <th>Descriptcion</th>
+        <th>Precio Unitario</th>
+        <th>VTA N/SUJ</th>
+        <th>VTA EXEN.</th>
+        <th> VENTAS GRABADAS</th>
+    </tr>
+  </thead>
+  <tbody>
+  <!-- valores de facuta -->
+    <tr>
+      <th scope="row">{{ fichas.count }}</th>
+      <td>Pruebas psicometricas</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ iva | floatformat:2}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>SUMAS $</td>
+        <td>{{ iva |floatformat:2 }}</td>
+    </tr>
+  <tr>
+      <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>(-) IVA RETENIDO $</td>
+        <td>{{ impuesto| floatformat:2 }}</td>
+    </tr>
+  <tr>
+      <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>SUB-TOTAL $</td>
+        <td>{{ monto }}</td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>VENTAS NO SUJETAS $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>VENTAS EXENTAS $</td>
+        <td></td>
+    </tr>
+  <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>TOTAL $</td>
+        <td>{{ monto}}</td>
+    </tr>
+  </tbody>
+</table>
+                             <!--PDF -->
+       <div class="col-lg-1">
+       <form action="{% url 'ArguetaServicios:reporte_personas_pdf' %}" method="get">
+           {% csrf_token %}
+
+           <input class="hide" value="{{ emo }}" name="emo" >
+           <input class="hide" value="{{ desde }}" name="desde">
+           <input class="hide" value="{{ hasta }}" name="hasta">
+           <input class="hide" value="mm", name="tipo">
+
+          <button class="btn waves-effect red" type="submit" name="action">Generar Factura
+            <i class="material-icons right">file</i>
+          </button>
+       </form>
+       </div>
+
+        </div>
+    </div>
+      <!-- Fin Factura Manufacturera -->
+  </div>
+
+  </div>
+  <div class="card-footer text-muted">
+    {{ desde }} - {{ hasta}}
+  </div>
+
+</div>
+  </div>
+</div>
+{% endblock %}

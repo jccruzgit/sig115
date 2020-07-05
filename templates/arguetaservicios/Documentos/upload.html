@@ -1,0 +1,19 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %} Subir {% endblock %}
+
+{% block body %}
+    <div class="class_container_crud">
+    <h4 class="center-align">Subir AP</h4>
+            <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+                <div class="center-align">
+                    <input class="btn green" type="submit" value="Guardar">
+                    <a class="waves-effect red btn" href="{% url 'recepcion:dashboard' %}">Cancelar</a>
+                </div>
+            </form>
+    </div>
+{% endblock %}

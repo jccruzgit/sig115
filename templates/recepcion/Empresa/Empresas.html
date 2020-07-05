@@ -1,0 +1,63 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %}Empresas{% endblock %}
+{% block body %}
+
+<header style="background: grey"><a class="waves-effect green btn" href="{% url 'recepcion:empresa' %}"><i class="material-icons left">add</i>Agregar</a></a>
+</header>
+<div class="container">
+<h2>Lista de Empresas</h2>
+</div>
+    <div class="container">
+        <table class="highlight centered responsive-table">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+
+                    <th>Nombre</th>
+                    <th>NIT</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+        <tbody>
+            {% if empresa_list  %}
+                {% for empresa in empresa_list %}
+                <tr>
+                    <td>{{ empresa.codEmpresa }}</td>
+
+                    <td>{{ empresa.nombre }}</td>
+                    <td>{{ empresa.nit }}</td>
+                    <td>
+                   <a class="btn-floating btn-medium waves-effect waves-light blue tooltipped" data-position="bottom" data-tooltip="I am a tooltip" href="{% url 'recepcion:empresaupdate' empresa.codEmpresa%}"><i class="material-icons">update</i></a>
+                   <a class="btn-floating btn-medium waves-effect waves-light red" href="{% url 'recepcion:empresadelete' empresa.codEmpresa%}"><i class="material-icons">delete</i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <h1>No hay registros de Empresas</h1>
+            {% endif %}
+          </tbody>
+            <tfoot>
+
+            <ul class="pagination">
+    <li class="waves-effect">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a>
+        {% endif %}
+    </li>
+    <li class="waves-effect">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" ><i class="material-icons">chevron_right</i></a>
+        {% endif %}
+    </li>
+  </ul>
+            </tfoot>
+    </table>
+
+
+{% endblock %}
+
+{% block script %}
+
+
+{% endblock %}

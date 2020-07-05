@@ -1,0 +1,68 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% block titulo %}Archivar {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Lista de Fichas</h2>
+    </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Solicitante</th>
+                        <th>Evaluado</th>
+                        <th>Fecha</th>
+                        <th>Resultado</th>
+                        <th>Actualizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if ficha_list  %}
+                        {% for f in ficha_list %}
+                            <tr>
+                            <td>{{ f.idProgramado.idEmpresa.nombre }}</td>
+                            <td>{{ f.idProgramado.idSolicitante.nombre }} {{ f.idProgramado.idSolicitante.apellidos }}</td>
+                            <td>{{ f.idProgramado.nombreEvaluado }}</td>
+                            <td>{{ f.fechaFicha }}</td>
+                            <td>{{ f.idResultado.resultado }}</td>
+                            <td>
+          <button type="button" class="update-book btn btn-sm btn-primary" data-id="{% url 'recepcion:fichaup' f.pk%}">
+              <i class="material-icons">update</i>
+      </button>
+
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <h3>Todas las fichas han sido actualizadas con su resultado</h3>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+ }}
+
+<div class="modalB" tabindex="-1" role="dialog" id="modal3">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+    {% block script %}
+<script type="text/javascript">
+  $(function () {
+    // Create book button
+
+
+    $(".update-book").each(function () {
+      $(this).modalForm({
+          modalID: "#modal3",
+          formURL: $(this).data('id'),
+      });
+    });
+
+
+  });
+</script>
+        {% endblock %}
+{% endblock %}

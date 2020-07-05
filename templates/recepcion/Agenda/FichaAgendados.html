@@ -1,0 +1,129 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block titulo %}Actualizar Datos {% endblock %}
+{% block body %}
+
+
+    <div class="class_container_crud" style="width: 70%;">
+    <h4 class="center-align">Actualizar Ficha Psicometrica </h4>
+            <form method="post" action="">
+            {% csrf_token %}
+                <fieldset style="border-radius: 2%;">
+                    <legend>Datos Generales</legend>
+
+                    <div class="row">
+
+                        <div class="input-field col s7 align-right">
+                          {{ form.idEmpresa }}
+                          <label for="idEmpresa">Empresa</label>
+                        </div>
+
+                        <div class="input-field col s5 align-right">
+                          {{ form.idSolicitante }}
+                          <label for="idEmpresa">Solicitante</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                          {{ form.fechaEvaluar }}
+                          <label for="fechaEvaluar">Fecha Evaluacion</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                          {{ form.horaProgramada }}
+                          <label for="horaProgramada">Hora Programada</label>
+                        </div>
+                        <div class="input-field col s4">
+                          {{ form.idTipoPrueba }}
+                          <label for="idTipoPrueba">Tipo de Prueba</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="input-field col s9">
+                            {{ form.nombreEvaluado }}
+                            <label for="nombreEvaluado">Nombre Evaluado</label>
+                        </div>
+                        <div class="input-field col s3">
+                            {{ form2.dui }}
+                            <label for="dui"> Documento de identidad</label>
+                        </div>
+                        <div class="input-field col s12">
+
+                    {{ form.puesto }}
+                            <label for="puesto">Puesto</label>
+                        </div>
+
+                        {{ form2.precio }}
+                    </div>
+
+
+                </fieldset>
+
+
+                <fieldset style="border-radius: 3%;margin-top: 5%; margin-bottom: 2%;">
+                    <legend>Datos Especificos</legend>
+                    {{ form2.idProgramado }}
+                    <div class="row">
+                        <div class="input-field col s4">
+                            {{ form2.idEvaluador }}
+                            <label for="idpoligrafista">Evaluador</label>
+                        </div>
+                        <div class="input-field col s4">
+                            {{ form2.ap }}
+                            <label for="id_ap">AP</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            {{ form2.idResultado }}
+                            <label for="idResultado">Resultado</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            {{ form2.observaciones }}
+                            <label for="observaciones">Observaciones</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="center-align">
+                    <input class="btn green" type="submit" value="Guardar">&nbsp;
+                    <a class="waves-effect red btn" href="{% url 'recepcion:agendados' %}">Cancelar</a>
+                </div>
+
+            </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        document.getElementById("id_idProgramado").value={{ agenda.idAgendado }};
+    </script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+	    $("#id_dui").inputmask();
+	});
+	</script>
+<script>
+console.log({{ agenda.idAgendado }})
+</script>
+
+
+    <script>
+    $(document).ready(function() {
+    $("#idevaluador").change(function()
+    {
+        var poli = ($('#idevaluador option:selected').html());
+
+        var num2 = ('{{ agenda.idEmpresa.codEmpresa }}');
+        var id = ('{{ id }}');
+
+        console.log(num2);
+         document.getElementById("id_ap").value=poli+'-'+num2+'-'+id;
+            });
+        });
+    </script>
+
+{% endblock %}

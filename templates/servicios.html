@@ -1,0 +1,80 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block header%}
+{% endblock %}
+{% block enlaces %}
+
+    <li><a href="{% url 'servicios' %}"><i class="material-icons left">work</i>Servicios</a></li>
+    <li><a href="{% url 'nosotros' %}"><i class="material-icons left">people</i>Nosotros</a></li>
+    <li><a href="{% url 'contactanos' %}"><i class="material-icons left">phone_in_talk</i>contactenos</a></li>
+    <li><a href="{% url 'recepcion:login' %}"><i class="material-icons left">account_circle</i>Login</a></li>
+{% endblock %}
+
+{% block body %}
+<div>
+  <div class="parallax-container" id="poligrafia">
+      <div class="parallax"><img src="{% static 'img/servicios_neointec.jpg' %}"></div>
+    </div>
+    <div class="section white">
+      <div class="row container">
+        <h2 class="header">Pruebas Psicologicas</h2>
+        <p class="grey-text text-darken-3 lighten-3">Argueta Servicios S.A. de C.V, te
+            brinda servicios de pruebas psicologicas en sus diferentes tipos  <b>Test de Inteligencia</b>, <b>Test de Personalidad,</b>
+            <b>Test de Aptitudes</b>, <b>Test de Desarrollo</b>, entre otros
+        </p>
+      </div>
+    </div>
+     <div class="parallax-container">
+      <div class="parallax"><img src="{% static 'img/poli.jpg' %}"></div>
+    </div>
+
+        <div class="section white" id="psicometria">
+        <div class="row container">
+            <h2 class="header">Psicometria</h2>
+            <p class="grey-text text-darken-3 lighten-3">Argueta Servicios S.A. de C.V, te brinda servicios de psicometría, en la cual se busca
+            medición de las funciones mentales en general y de las características psíquicas de los individuos en particular.</p>
+    </div>
+    </div>
+        <div class="parallax-container">
+        <div class="parallax"><img src="{% static 'img/ppp.png' %}"></div>
+        </div>
+
+    <div class="section white" id="consultoria">
+      <div class="row container">
+        <h2 class="header">Consultoria Profesional</h2>
+        <p class="grey-text text-darken-3 lighten-3">Argueta Servicios S.A. de C.V, te brinda servicios de Coaching, Capital Humano, Outsourcing de personal</p>
+      </div>
+    </div>
+      <div class="parallax-container">
+      <div class="parallax"><img src="https://i2.wp.com/gaztenpresa.org/statics/2016/06/consultoria-pymes-blog.jpg?fit=600%2C325&ssl=1"></div>
+      </div>
+</div>
+{% endblock %}
+{% block footer %}
+    <br>
+   <footer class="page-footer black">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Buscanos en nuestras redes sociales</h5>
+                <a href="https://www.facebook.com/arguetaservicios/" class="fa fa-facebook" prefix="left"></a>
+                  <p>
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Farguetaservicios%2F&width=203&layout=button_count&action=like&size=large&show_faces=true&share=true&height=46&appId" width="203" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Mapa del Sitio</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'home' %}">home</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'recepcion:login' %}">Login</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright Argueta Servicios S.A de C.V
+            </div>
+          </div>
+        </footer>
+   {% endblock %}

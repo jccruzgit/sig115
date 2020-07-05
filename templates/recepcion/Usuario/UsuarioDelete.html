@@ -1,0 +1,9 @@
+{% extends 'recepcion/dashboard.html' %}
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+        <h3>Desea eliminar el registro de {{ user.first_name }}?</h3>
+       <input class="btn red" type="submit" value="Eliminarr">
+        <a class="waves-effect blue btn" href="{% url 'recepcion:usuario' %}">Cancelar</a>
+    </form>
+{% endblock %}

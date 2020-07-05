@@ -1,0 +1,125 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block enlaces %}
+        <li><a href="{% url 'servicios' %}"><i class="material-icons left">work</i>Servicios</a></li>
+        <li><a href="{% url 'nosotros' %}"><i class="material-icons left">people</i>Nosotros</a></li>
+        <li><a href="{% url 'contactanos' %}"><i class="material-icons left">phone_in_talk</i>contactenos</a></li>
+        <li><a href="{% url 'recepcion:login' %}"><i class="material-icons left">account_circle</i>Login</a></li>
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="nosotros_content">
+        <div class="MisionVision">
+
+            <div class="card Mh4" style="width: 100%;">
+              <img src="{% static 'img/VISION.png' %}" class="card-img-top" alt="..." style="width: 100%; height: 228px; ">
+              <div class="card-body" style="margin-left: 3%; margin-right: 3%;">
+
+                <p class="card-title" align="justify" style="">
+                   Ser un apoyo estratégico de su organizacion para contribuir en la consecusion de resultados extraordinarios
+                </p>
+              </div>
+            </div>
+
+
+
+            <div class="card Mh4" style="width: 100%;">
+              <img src="{% static 'img/mision.jpg' %}" class="card-img-top" alt="..." style="width: 100%; ">
+              <div class="card-body" style="margin-left: 3%; margin-right: 3%;">
+
+                <p class="card-title" align="justify" style="">
+                 Mantener un nivel constante de excelencia en todos nuestros servicios y proporcionar a nuestros clientes atencion de primer
+                    nivel.
+                </p>
+              </div>
+            </div>
+
+
+
+            <div class="card Mh4" style="width: 100%;">
+              <img src="{% static 'img/valores.jpg' %}" class="card-img-top" alt="..." style="width: 100%; ">
+              <div class="card-body" style="margin-left: 3%; margin-right: 3%;">
+               <ul class="card-text">
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp;Amor a Dios</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Credibilidad</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Confianza</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Compromiso</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Honestidad</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Integridad</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Innovacion</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Responsabilidad</li>
+                <li style="font-family: Calibri; font-size: 20px;">&nbsp; Trabajo en Equipo</li>
+            </ul>
+              </div>
+            </div>
+
+
+        </div>
+
+        <div class="Historia">
+            <div class="center">
+                <video src="{% static 'img/fondo2.mp4' %}" width="75%" height="3%" style="position: center;" loop autoplay preload muted></video>
+            </div>
+                <h3 class="Hh4 blue-text text-darken-4">ARGUETA SERVICIOS S.A. DE C.V. </h3>
+            <p class="Hp">
+            SOMOS la empresa que cumple su promesa mediante la conformacion de un prestigioso equipo de profesionales
+                expertos los cuales son nuestro exito, ya que poseemos al talento humano mas experimentado y confiable para
+                las areas de evaluaciones de riesgo y psicometria, quienes poseen estudios superiores entre los que se encuentran Abogados, Psicologos
+                Administradores de empresa y como PLUS cuentan con competencias especializadas.
+            </p>
+            <p class="Hp">
+                Nacimos en 2003, su fundador Juan Carlos Argueta, partio del deseo de aportar a las empresas
+                , procesos de evaluaciones con altos niveles de confiabilidad  y ética para que aportaran valor a las organizaciones
+                al momento de tomar decisiones en la selección, contratación e investigación del personal.
+            </p>
+
+            <p class="Hp">
+                Estuvimos conscientes que nuestro servicio más especializado es psicometrias y este representaba el reto más grande
+                , con el fin de cambiar la cultura de las empresas en El Salvador con respecto a los protocolos validados que implica
+                hacer un proceso psicologico certificado.
+            </p>
+
+            <p class="Hp">
+                En el trayecto de esta segunda década, estamos más comprometidos a nuestra filosofía de empresa y hemos ganado espacios
+                muy significativos de credibilidad ya que estamos enfocados en nuestra vision de mantener un nivel constante de excelencia,
+                innovación y servicio a todos nuestros clientes.
+            </p>
+
+
+
+        </div>
+
+    </div>
+{% endblock %}
+{% block footer %}
+   <footer class="page-footer black">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Buscanos en nuestras redes sociales</h5>
+                <a href="https://www.facebook.com/arguetaservicios/" class="fa fa-facebook" prefix="left"></a>
+                  <p>
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Farguetaservicios%2F&width=203&layout=button_count&action=like&size=large&show_faces=true&share=true&height=46&appId" width="203" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Mapa del Sitio</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'home' %}">home</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'login' %}">Login</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright Argueta Servicios S.A de C.V
+            </div>
+          </div>
+        </footer>
+
+{% endblock %}
+

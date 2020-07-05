@@ -1,0 +1,165 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %} Graficas {% endblock %}
+{% block body %}
+    <section id="content">
+    <div class="container" style="margin-bottom: 5%;">
+        <h4>REPRESENTACION DE LA CANTIDAD DE EVALUADOS POR EMPRESA {% now  "d/m/Y" %}</h4>
+        <hr>
+        <button class="btn red" id="mostrar1">Mostrar Grafica de Barra</button>
+        <button class="btn blue" id="ocultar1">Ocultar Grafica de Barra</button>
+        <div class="col-sm-40" id="target1" style="display: none;">
+            <h3> Grafica de Barras</h3>
+            <canvas id="myChart" width="600" height="300"></canvas>
+        </div>
+        <hr>
+        <button class="btn red" id="mostrar">Mostrar Grafica de pastel</button>
+        <button class="btn blue" id="ocultar">Ocultar Grafica de pastel</button>
+            <div class="col-sm-40" id="target" style="display: none;">
+                <h3>Grafica de Pastel</h3>
+                <canvas id="myChart2" width="600" height="300"></canvas>
+            </div>
+
+
+        <hr>
+        <h4>REPRESENTACION DE LA CANTIDAD DE EVALUADOS POR EVALUADOR </h4>
+
+        <button class="btn red" id="poliS">Mostrar Grafica de evaluadores</button>
+        <button class="btn blue" id="poliO">Ocultar Grafica de evaluadores</button>
+            <div class="col-sm-40" id="poli" style="display: none;">
+                <h3>Grafica de Pastel</h3>
+                <canvas id="myChart3" width="600" height="300"></canvas>
+            </div>
+     </div>
+
+
+
+    </section>
+{% endblock %}
+
+{% block script %}
+   <script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: {{ empresas|safe}},
+        datasets: [{
+            label: '# Evaluados',
+            data: {{ cantidad|safe}},
+            backgroundColor: {{ color|safe }},
+            borderColor: {{ color|safe }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+    <script>
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: {{ empresas|safe}},
+        datasets: [{
+            label: '# Evaluados',
+            data: {{ cantidad|safe}},
+            backgroundColor: {{ color|safe }},
+            borderColor: {{ color|safe }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+   <script>
+var ctx = document.getElementById("myChart3").getContext('2d');
+var myChart3 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ evaluadores|safe}},
+        datasets: [{
+            label: '# Evaluados',
+            data: {{ numero2|safe}},
+            backgroundColor: {{ colores2|safe }},
+            borderColor: {{ colores2|safe }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+
+
+
+
+
+
+    <script>
+$( "#mostrar" ).click(function() {
+    $( "#target" ).show(2000);
+  $( "#target" ).show( "slow" );
+
+});
+
+$( "#ocultar" ).click(function() {
+    $("#target").hide(2000);
+});
+</script>
+
+     <script>
+$( "#mostrar1" ).click(function() {
+    $( "#target1" ).show(2000);
+  $( "#target1" ).show( "slow" );
+
+});
+
+$( "#ocultar1" ).click(function() {
+    $("#target1").hide(2000);
+});
+</script>
+
+
+     <script>
+$( "#poliS" ).click(function() {
+    $( "#poli" ).show(2000);
+  $( "#poli" ).show( "slow" );
+
+});
+
+$( "#poliO" ).click(function() {
+    $("#poli").hide(2000);
+});
+</script>
+
+
+
+
+{% endblock %}

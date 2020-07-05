@@ -1,0 +1,27 @@
+{% extends 'recepcion/dashboard.html' %}
+{% block body %}
+
+
+    <div class="class_container_crud">
+    <h2>Tipo de resultado</h2>
+        <form class="" method="post" action="">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="row">
+                    <div class="input-field col s12">
+                        {% if field.errors %}
+                        {{ field.errors }}
+                        {% endif %}
+                            {{ field }}
+                        <label class="{% for class in field.label_clasess %} {{ class }} {% endfor %}" for="{{ field.name }}">{{ field.label }}</label>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="center-align">
+            <input class="btn green" type="submit" value="Guardar">
+            <a class="waves-effect red btn" href="{% url 'recepcion:resultados' %}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block titulo %}{% endblock %}</title>
+        {% block link %}
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" >
+            <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" >
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/forms.css' %}" >
+        {% endblock %}
+
+  </head>
+  <body>
+   <header class="marg">
+
+       {% block dropdown %}
+       {%  endblock %}
+       <div class="navbar-fixed"  >
+       <nav>
+        <div class="nav-wrapper #1a237e indigo darken-4">
+            <a href="{% url 'home' %}" class="brand-logo"><i class="large material-icons">home</i>Inicio</a>
+            <ul class="right hide-on-med-and-down">
+            {% block enlaces %}{% endblock %}
+            </ul>
+            </div>
+        </nav>
+        </div>
+            {% block header %}{% endblock %}
+    </header>
+
+    {% block body %}
+    {% endblock %}
+
+    {% block scriptjs %}
+            <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="{% static 'js/materialize.min.js' %}"></script>
+
+
+
+            <script type="text/javascript"  >
+               $(".dropdown-trigger").dropdown();
+            </script>
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.parallax');
+                var instances = M.Parallax.init(elems, options);
+                instances.open();
+                instances.close();
+                });
+                  $(document).ready(function(){
+                    $('.parallax').parallax();
+                  });
+            </script>
+
+        <script type="text/javascript">
+  // start carrousel
+   $('.carousel.carousel-slider').carousel({
+      fullWidth: true,
+      indicators: true
+   });
+
+
+   // move next carousel
+   $('.moveNextCarousel').click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $('.carousel').carousel('next');
+   });
+
+   // move prev carousel
+   $('.movePrevCarousel').click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $('.carousel').carousel('prev');
+   });
+
+   function autoplay() {
+ $('.carousel').carousel('next');
+ setTimeout(autoplay, 4000);
+}
+setTimeout(autoplay, 4000);
+        </script>
+
+<script>
+$(document).ready(function(){
+    $('ul.tabs').tabs({
+
+
+    });
+  });
+</script>
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>
+     {% endblock %}
+  </body>
+  <footer>
+    {% block footer %}{% endblock %}
+  </footer>
+
+</html>

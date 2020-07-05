@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+{% block css %}{% endblock %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.css' %}" >
+
+    <!-- posiblemente materialize de error -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" >
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" >
+    <link type="text/css" rel="stylesheet" href="{% static 'css/forms.css' %}" >
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}{% endblock %}</title>
+</head>
+
+<body>
+<header>
+   <nav class="#1a237e indigo darken-4">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                 <li><h5 style="font-weight: bold;">Profesionales que garantizan el exito</h5></li>
+            </ul>
+    </nav>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="{% static 'img/side.jpg' %}">
+                    </div>
+                   <a href="#user"><img class="circle" src="{% static 'img/fondo.png' %}"></a>
+                   <a href="#name"><span class="white-text name">{{ user.username }}</span></a>
+                   <a href="#email"><span class="white-text email">{{ user.email }}</span></a>
+                </div>
+            </li>
+            <!-- collapsible -->
+
+                <ul class="collapsible">
+                    {% if perms.auth.view_user %}
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">business_center</i>Administracion</div>
+                      <div class="collapsible-body">
+                          <ul>
+                            {% if perms.recepcion.view_empresa %}
+                          <li><a href="{% url 'recepcion:empresas' %}"><i class="material-icons left blue-text">work</i>Empresas</a></li>
+                            {% endif %}
+                          {% if perms.auth.view_user %}
+                              <li><a href="{% url 'recepcion:usuario' %}"><i class="material-icons left green-text">person_add</i>Usuarios</a></li>
+                          {% endif %}
+                           {% if perms.auth.view_user %}
+                              <li><a href="{% url 'recepcion:cliente' %}"><i class="material-icons left red-text">person_add</i>Usuarios Clientes</a></li>
+                          {% endif %}
+                            {% if perms.recepcion.view_solicitante %}
+                          <li><a href="{% url 'recepcion:solicitante' %}"><i class="material-icons left purple-text">people</i>Solicitantes</a></li>
+                          {% endif %}
+                              {% if perms.recepcion.view_evaluador %}
+                              <li><a href="{% url 'recepcion:evaluadores' %}"><i class="material-icons left orange-text">people</i>Evaluadores</a></li>
+                              {% endif %}
+                              {% if perms.recepcion.view_tipoprueba %}
+                              <li><a href="{% url 'recepcion:pruebas' %}"><i class="material-icons left red-text">format_list_bulleted</i>Tipos de Prueba</a></li>
+                            {% endif %}
+                          {% if perms.recepcion.view_tiporesultado %}
+                              <li><a href="{% url 'recepcion:resultados' %}"><i class="material-icons left brown-text">exposure_neg_2</i>Tipos de Resultados</a></li>
+                        {% endif %}
+                          </ul>
+                      </div>
+                    </li>
+                {% endif %}
+                {% if perms.recepcion.view_agenda %}
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">remove_from_queue</i>Recepcion</div>
+                      <div class="collapsible-body">
+                          <ul>
+                        {% if perms.recepcion.view_agenda %}
+                          <li><a href="{% url 'recepcion:agendar' %}"><i class="material-icons left green-text">contacts</i>Agendar</a></li>
+                         {% endif %}
+                          {% if perms.recepcion.view_agenda %}
+                              <li><a href="{% url 'recepcion:agendados' %}"><i class="material-icons left blue-text">assignment</i>Agendados</a></li>
+                          {% endif %}
+
+                          {% if perms.recepcion.view_agenda %}
+                              <li><a href="{% url 'recepcion:archivar' %}"><i class="material-icons left">search</i>Buscar</a></li>
+                          {% endif %}
+                          {% if perms.recepcion.view_agenda %}
+                              <li><a href="{% url 'recepcion:archivos' %}"><i class="material-icons left red-text">move_to_inbox</i>Fichas</a></li>
+                          {% endif %}
+
+                      </ul>
+                      </div>
+                    </li>
+                {% endif %}
+                {% if perms.facturacion.view_precio %}
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">assessment</i>Facturacion y Reportes</div>
+                      <div class="collapsible-body">
+                          <ul>
+                              {% if perms.recepcion.view_ficha %}
+                              <li><a href="{% url 'facturacion:precios' %}"><i class="material-icons left green-text green-text">monetization_on</i>Precios</a></li>
+                              {% endif %}
+                          {% if perms.facturacion.view_precio %}
+                              <li><a href="{% url 'facturacion:facturar' %}"><i class="material-icons left blue-text blue-text">exposure</i>Facturar</a></li>
+                          {% endif %}
+                          </ul>
+                      </div>
+                    </li>
+                {% endif %}
+                {% if perms.facturacion.view_documentos %}
+                     <li>
+                      <div class="collapsible-header"><i class="material-icons">folder_shared</i>Documentos</div>
+                      <div class="collapsible-body">
+                          <ul>
+                          {% if perms.recepcion.add_ficha %}
+                          <li><a href="{% url 'facturacion:upload' %}"><i class="material-icons left green-text">file_upload</i>Subir Archivos</a></li>
+                        {% endif %}
+                              {% if perms.facturacion.view_documentos %}
+                          <li><a href="{% url 'facturacion:download' %}"><i class="material-icons left blue-text">file_download</i>Ver archivos</a></li>
+                          {% endif %}
+                          {% if perms.recepcion.view_ficha %}
+                              <li><a href="{% url 'facturacion:graficas' %}"><i class="material-icons left purple-text">equalizer</i>Ver graficas</a></li>
+                            {% endif %}
+                          </ul>
+                      {% endif %}
+                      </div>
+                    </li>
+                    <hr>
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">settings</i>Configuracion</div>
+                      <div class="collapsible-body ">
+                        <ul>
+                          <li><a href="{% url 'recepcion:edit' %}"><i class="material-icons left">account_circle</i>Mi perfil</a></li>
+                          <li><a href="{% url 'recepcion:edit_password' %}"><i class="material-icons left">update</i>Cambiar contraseña</a></li>
+                          <li><a href="{% url 'recepcion:logout' %}"><i class="material-icons left">logout</i>Salir</a></li>
+                      </ul>
+                      </div>
+                    </li>
+                </ul>
+               <!-- end collapsible -->
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger white-text inicio"><i class=" medium material-icons ">menu</i></a>
+
+</header>
+{% block body %}
+{% endblock %}
+
+
+<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/materialize.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/Chart.js' %}"></script>
+
+
+
+            <script type="text/javascript"  >
+               $(".dropdown-trigger").dropdown();
+            </script>
+
+            <script>
+                     document.addEventListener('DOMContentLoaded', function() {
+                    var elems = document.querySelectorAll('.slider');
+                    var instances = M.Slider.init(elems, options);
+                  });
+
+                  $(document).ready(function(){
+                    $('.slider').slider();
+                  });
+            </script>
+
+            <script type="text/javascript">
+                    document.addEventListener('DOMContentLoaded', function() {
+                    var elems = document.querySelectorAll('.sidenav');
+                    var instances = M.Sidenav.init(elems, options);
+                  });
+                  $(document).ready(function(){
+                    $('.sidenav').sidenav();
+                  });
+            </script>
+
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.collapsible');
+                var instances = M.Collapsible.init(elems, options);
+              });
+              $(document).ready(function(){
+                $('.collapsible').collapsible();
+              });
+            </script>
+
+{% block script %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block body %}
+    <div class="class_container_crud">
+    <h4 class="center-align">Usuario Cliente</h4>
+            <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+                {{ form2.as_p }}
+
+                <div class="center-align">
+                    <input class="btn green" type="submit" value="Guardar">
+                    <a class="waves-effect red btn" href="{% url 'recepcion:usuario' %}">Cancelar</a>
+                </div>
+            </form>
+    </div>
+{% endblock %}

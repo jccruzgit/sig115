@@ -1,0 +1,98 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block titulo %}Agendados {% endblock %}
+
+
+{% block body %}
+
+    <style>
+    .backdrop{
+       background-color: purple;
+     }
+  </style>
+<header style="background: grey"><a class="waves-effect green btn" href="{% url 'recepcion:agendar' %}"><i class="material-icons left">add</i>Agregar</a>
+</header>
+    <div class="container" style="display: inline">
+    <div class="row">
+
+      <div class="row">
+        <form class="col s12" action="{% url 'recepcion:buscar' %}" style="display: inline;" method="POST">
+        {% csrf_token %}
+              <h4 style="display: inline;" class="center"> Programacion del {%  now "d-m-Y"%}</h4>
+                <div class="input-field col s3 right" style="display: inline;">
+                    <button class="btn waves-effect grey white-text prefix" type="submit" name="action" style="display: inline;"><i class="material-icons">search</i></button>
+                     <input id="icon_prefix" type="search" name="buscalo" style="display: inline;" class="datepicker" pattern="^[0-9]{2}-[012]{2}-[0-9]{4}">
+                </div>
+        </form>
+    </div>
+</div>
+    <div class="container">
+        <table class="highlight centered responsive-table">
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+
+                    <th>Nombre</th>
+                    <th>Puesto</th>
+                    <th>fecha</th>
+                    <th>Hora</th>
+                    <th>Asistencia</th>
+                    <th>Opciones</th>
+                </tr>
+
+            </thead>
+        <tbody>
+            {% if agenda_list  %}
+                {% for agendado in agenda_list %}
+                <tr>
+                    <td>{{ agendado.idEmpresa.nombre }}</td>
+
+                     <td>{{ agendado.nombreEvaluado }}</td>
+                    <td>{{ agendado.puesto }}</td>
+                    <td>{{ agendado.fechaEvaluar }}</td>
+                    <td>{{ agendado.horaProgramada }}</td>
+                    <td>{{ agendado.asistencia|yesno:"Si,No" }}</td>
+                <td class="inline">
+                    {% if agendado.asistencia %}
+                   <a class="btn-floating btn-medium waves-effect waves-light red tooltipped" data-position="left" data-tooltip="Crear Ficha" href="{% url 'recepcion:ficha' agendado.idAgendado%}"><i class="material-icons">add</i></a>
+                    {% endif %}
+                    <a class="btn-floating btn-medium waves-effect waves-light blue tooltipped" data-position="bottom" data-tooltip="Actualizar Agenda" href="{% url 'recepcion:agendaupdate' agendado.idAgendado %}"><i class="material-icons">update</i></a>
+
+                    {% for f in ext %}
+                        {% if f.idProgramado_id == agendado.idAgendado %}
+                    <a class="btn-floating btn-medium waves-effect waves-light green tooltipped" data-position="right" data-tooltip="Actualizar Ficha" href="{% url 'recepcion:agendaficha' agendado.idAgendado%}"><i class="material-icons">update</i></a>
+                        {% endif %}
+                        {% endfor %}
+
+
+
+
+                </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <h1>No hay Evualuados Programados para el dia de hoy</h1>
+            {% endif %}
+          </tbody>
+
+    </table>
+    </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+
+    $('.tooltipped').tooltip();
+  });
+    </script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block titulo %}Login{% endblock %}
+{% block enlaces %}
+     <li><a href="{% url 'servicios' %}"><i class="material-icons left">work</i>Servicios</a></li>
+    <li><a href="{% url 'nosotros' %}"><i class="material-icons left">people</i>Nosotros</a></li>
+    <li><a href="{% url 'contactanos' %}"><i class="material-icons left">phone_in_talk</i>contactenos</a></li>
+    <li><a href="{% url 'recepcion:login' %}"><i class="material-icons left">account_circle</i>Login</a></li>
+{% endblock %}
+{% block body %}
+<body class="backlog"></body>
+    <div class="class_container_form">
+    <form method="post" action="">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="row">
+            <div class="input-field col s12">
+                {% if field.errors %}
+                    {{ field.errors }}
+                {% endif %}
+
+            {{ field }}
+            <label class="{% for class in field.label_clasess %} {{ class }} {% endfor %}" for="{{ field.name }}">{{ field.label }}</label>
+            </div>
+        </div>
+    {% endfor %}
+        <label>Si has olvidado tu cuenta </label><a class="blue-text" href="{% url 'password_reset' %}">pulsa aqui</a>
+        <div class="right-align">
+        <input class="btn blue" type="submit" value="Iniciar">
+        </div>
+    </form>
+    </div>
+{% endblock %}

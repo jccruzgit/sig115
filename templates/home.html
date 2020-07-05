@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Argueta Servicios | Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+      <style>
+          .fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+                border-radius: 50%;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+body {
+  background-image: url('static/img/back3.jpg');
+}
+      </style>
+
+  </head>
+
+  <body background="">
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top align-content-end" style="background-color: #1a237e">
+
+
+        <a class="navbar-brand " href="{% url 'home' %}"><i class="material-icons align-middle">home</i> Argueta Servicios</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+     <ul class="navbar-nav ml-auto" style="display: inline-list-item;">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'nosotros' %}"><i class="material-icons align-top">people</i> Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'servicios' %}"><i class="material-icons align-top">work</i> Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'contactanos' %}"><i class="material-icons align-top">phone_in_talk</i> Contactanos</a>
+            </li>
+              <li class="nav-item">
+
+              <a class="nav-link text-white" href="{% url 'login' %}"><i class="material-icons align-top">account_circle</i> Iniciar sesion</a>
+            </li>
+          </ul>
+        </div>
+
+
+    </nav>
+
+
+
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox" style="margin-top:50px;">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+          <div class="carousel-item active" style="background-image: url({% static 'img/gente.png' %})";>
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Argueta Servicios</h3>
+              <p>Tu Satisfacción en la selección es nuestra política.</p>
+            </div>
+          </div>
+          <!-- Slide Two - Set the background image for this slide in the line below -->
+          <div class="carousel-item" style="background-image: url({% static 'img/proquegen.jpg' %})">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Second Slide</h3>
+              <p>This is a description for the second slide.</p>
+            </div>
+          </div>
+          <!-- Slide Three - Set the background image for this slide in the line below -->
+          <div class="carousel-item" style="background-image: url({% static 'img/psi.jpg' %})">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+
+    <!-- Page Content -->
+     <div>
+     <img src="{% static 'img/compromiso2.jpg' %}" width="900" height="100" style="position: center;margin-left:15%" ></img>
+    </div>
+    <div class="container">
+
+      <!-- Marketing Icons Section -->
+      <div class="card-deck">
+  <div class="card">
+    <img src="{% static 'img/psico.png' %}" class="card-img-top" alt="..." width="700" height="300">
+    <div class="card-body">
+      <h5 class="card-title">Pruebas Psicométricas</h5>
+      <p class="card-text">Realizamos diversos tipos de pruebas Psicométricas acordes a tu rubro de empresa o negocio.</p>
+    </div>
+    <div class="card-footer">
+     <a href="{% url 'servicios' %}" class="btn btn-primary">Saber Más</a>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{% static 'img/psicog.png' %}" class="card-img-top" width="700" height="300">
+    <div class="card-body">
+      <h5 class="card-title">Pruebas Psicológicas</h5>
+      <p class="card-text">Te ofrecemos pruebas de personalidad atendiendo a la plaza que deseas cubrir.</p>
+    </div>
+    <div class="card-footer">
+    <a href="{% url 'servicios' %}" class="btn btn-primary">Saber Más</a>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{% static 'img/testsell.png' %}" class="card-img-top" alt="..." width="700" height="300">
+    <div class="card-body">
+      <h5 class="card-title">Pruebas IQ</h5>
+      <p class="card-text">Tenemos pruebas para medir el Coeficiente Intelectual de tus empleados y futuros candidatos.</p>
+    </div>
+    <div class="card-footer">
+    <a href="{% url 'servicios' %}" class="btn btn-primary">Saber Más</a>
+    </div>
+  </div>
+</div>
+        <!-- /.row -->
+
+      <!-- Features Section -->
+      <div class="row mt-xl-5" >
+        <div class="col-lg-6">
+          <h2>Argueta Servicios</h2>
+          <p>Apoyados por :</p>
+          <ul>
+            <li>
+              <strong>EFH:</strong> EXCELENCIA EN FACTOR HUMANO
+            </li>
+              <li><strong>PSICOSOFT:</strong>SISTEMAS DE MEDICION PSICOMETRICAS</li>
+            <li><strong>AIPP: </strong> ASSOCIACION INTERNACIONAL DE PROFESIONALES EN PSICOLOGIA</li>
+          </ul>
+          <p>La misión de nuestra empresa es ofrecer un servicio logrando un nivel de atención de clase mundial, así como desarrollar, diseñar y comercializar sistemas informáticos integrales para selección de personal.</p>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-fluid rounded" src="{% static 'img/as.png' %}" alt="">
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <hr>
+
+      <!-- Call to Action Section -->
+      <div class="row mb-4">
+        <div class="col-md-8">
+          <p>Buscanos, será un placer atenderte</p>
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-lg btn-primary btn-block" href="{% url 'contactanos' %}">Contactanos</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+
+           <div class="col l6 s12">
+                <h5 class="text-white">Buscanos en nuestras redes sociales</h5>
+                <a href="https://www.facebook.com/arguetaservicios/" class="fa fa-facebook text-white" style="margin-left: 8%;" ></a>
+                  <p>
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Farguetaservicios%2F&width=203&layout=button_count&action=like&size=large&show_faces=true&share=true&height=46&appId" width="203" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </p>
+              </div>
+        <p class="m-0 text-center text-white">Copyright &copy; Argueta Servicios 2020</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+  </body>
+
+</html>

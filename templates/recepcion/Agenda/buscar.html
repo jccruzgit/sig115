@@ -1,0 +1,39 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block body %}
+    <h3>Agendados para el dia: {{ dia }}</h3>
+    <div class="container">
+        <table class="highlight centered responsive-table">
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Solicitante</th>
+                    <th>Nombre</th>
+                    <th>Puesto</th>
+                    <th>Tipo de prueba</th>
+                    <th>fecha</th>
+                    <th>Hora</th>
+
+                </tr>
+
+            </thead>
+        <tbody>
+            {% if agendas  %}
+                {% for agendado in agendas %}
+                <tr>
+                    <td>{{ agendado.idEmpresa }}</td>
+                    <td>{{ agendado.idEmpresa.persona.nombre }}</td>
+                     <td>{{ agendado.nombreEvaluado }}</td>
+                    <td>{{ agendado.puesto }}</td>
+                    <td>{{ agendado.idTipoPrueba }}</td>
+                    <td>{{ agendado.fechaEvaluar }}</td>
+                    <td>{{ agendado.horaProgramada }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <h1>No hay Evualuados Programados para el dia de hoy</h1>
+            {% endif %}
+          </tbody>
+    </table>
+    </div>
+{% endblock %}

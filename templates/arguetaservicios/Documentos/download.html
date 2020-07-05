@@ -1,0 +1,26 @@
+{% extends 'arguetaservicios/Base_html/Base.html' %}
+{% load static %}
+{% block titulo %}Descarga{% endblock %}
+{% block body %}
+    <!-- inicio -->
+    <div class="container">
+    <ul class="collection">
+    {% if documentos_list %}
+    {% for document in documentos_list %}
+      <li class="collection-item avatar">
+      <a href="{{ document.documento.url }}"><img src="{% static 'img/pdf.png' %}" alt="" class="circle"></a>
+      <span class="title">Informe Psicometrico</span>
+      <p>Empresa : {{ document.idEmpresa.nombre }}<br>
+         Evaluado : {{ document.nombre }}
+      </p>
+      <a href="{{ document.documento.url }}" class="secondary-content"><i class="material-icons">file_download</i></a>
+    </li>
+    {% endfor %}
+        {% else %}
+        <h3>No hay Documentos que mostrar</h3>
+   {% endif %}
+  </ul>
+   </div>
+    <!-- fin -->
+
+{% endblock %}

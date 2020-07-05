@@ -1,0 +1,162 @@
+{% extends 'recepcion/dashboard.html' %}
+{% load static %}
+{% block titulo %}Crear Ficha{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<div class="class_container_crud" style="width: 70%;">
+
+    {% if price == 0 %}
+<div class="alert" role="alert"
+    style="
+    font-size: 22px;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;">
+
+    <b>¡Cuidado!</b> Aun no se ha definido un precio para esta empresa.
+    <a href="{% url 'ArguetaServicios:precios' %}" class="alert-link">Definir Precio</a>. Sino creas el precio, la ficha se guardara con un valor de cero dolares.
+</div>
+{% endif %}
+
+
+
+
+    <h4>Ficha Psicometrica</h4>
+
+
+
+<div class="row">
+    <form class="col s12">
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="empresa" type="text" class="validate" disabled value="{{ agenda.idEmpresa.nombre }}{{ agenda.idEmpresa.persona.apellidos }}">
+          <label for="empresa" class="black-text">Empresa :</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="solicitante" type="text" class="validate" disabled value="{{ agenda.idSolicitante.nombre }} {{ agenda.idSolicitante.apellidos }}">
+          <label for="solicitante" class="black-text">Solicitante :</label>
+        </div>
+      </div>
+         <div class="row">
+            <div class="input-field col s12 ">
+                <input value="{{ agenda.nombreEvaluado }}" id="evaluado" type="text" class="validate" disabled>
+                <label class="active black-text" for="evaluado">Nombre Evaluado</label>
+            </div>
+         </div>
+
+        <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="tipoP" type="text" class="validate" disabled value="{{ agenda.idTipoPrueba.tipoPrueba }}">
+          <label for="tipoP" class="black-text">Tipo de prueba :</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="puesto" type="text" class="validate" disabled value="{{ agenda.puesto }}">
+          <label for="puesto" class="black-text">Puesto:</label>
+        </div>
+
+        <div class="input-field col s6 hide">
+          <input id="codEmpresa" type="text" class="validate" disabled value="{{ agenda.idEmpresa.codEmpresa }}">
+          <label for="codEmpresa" class="black-text">Codigo Empresa:</label>
+        </div>
+      </div>
+    </form>
+</div>
+
+
+
+<div class="row">
+     <form class="col s12" method="POST">
+         {% csrf_token %}
+{{ form_ficha.idProgramado }}
+{{ form_ficha.precio }}
+         <div class="row">
+            <div class="input-field col s6">
+            {{ form_ficha.idEvaluador }}
+            <label for="idevaluador" class="black-text">Evaluador :</label>
+         </div>
+
+         <div class="input-field col s6">
+            {{ form_ficha.idResultado }}
+            <label for="id_idresultado" class="black-text">Resultado:</label>
+         </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12 ">
+                {{ form_ficha.ap }}
+                <label class="active black-text" for="id_ap">AP :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12 ">
+                {{ form_ficha.dui }}
+                <label class="active black-text" for="id_dui">Documento de identidad :</label>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="input-field col s12 ">
+                {{ form_ficha.observaciones }}
+               <label class="active black-text" for="id_ap">Observaciones :</label>
+            </div>
+        </div>
+
+
+            <div class="center-align">
+            <input class="btn green" type="submit" value="Guardar">
+            <a class="waves-effect red btn" href="{% url 'recepcion:agendados' %}">Cancelar</a>
+            </div>
+    </form>
+</div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/vex.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vex.combined.js' %}"></script>
+
+
+    <script>
+        document.getElementById("id_idProgramado").value={{ agenda.idAgendado }};
+    </script>
+
+      <script>
+        document.getElementById("precio").value={{ price }};
+    </script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+	    $("#id_dui").inputmask();
+	});
+	</script>
+
+    <script>
+    $(document).ready(function() {
+    $("#idevaluador").change(function()
+    {
+        var poli = ($('#idevaluador option:selected').html());
+        var num2 = document.getElementById("codEmpresa").value;
+        var id = {{ id }};
+
+        console.log(num2);
+         document.getElementById("id_ap").value=poli+'-'+num2+'-'+id;
+            });
+        });
+    </script>
+<script>
+console.log({{ price }});
+</script>
+
+
+{% endblock %}
